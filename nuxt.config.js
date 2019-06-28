@@ -1,6 +1,7 @@
 
 export default {
   mode: 'universal',
+  serverMiddleware: ['~/server'],
   /*
   ** Headers of the page
   */
