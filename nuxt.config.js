@@ -36,7 +36,9 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    '@nuxtjs/eslint-module'
+    ['@nuxtjs/eslint-module', {
+      fix: true
+    }]
   ],
   /*
   ** Build configuration
@@ -47,5 +49,9 @@ export default {
     */
     extend(config, ctx) {
     }
+  },
+
+  env: {
+    baseUrl: process.env.APP_URL || 'http://localhost:3000'
   }
 }
