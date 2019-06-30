@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   serverMiddleware: ['~/server'],
   /*
   ** Headers of the page
@@ -36,9 +36,7 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    ['@nuxtjs/eslint-module', {
-      fix: true
-    }]
+    '@nuxtjs/eslint-module'
   ],
   /*
   ** Build configuration
