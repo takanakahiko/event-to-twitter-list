@@ -75,9 +75,9 @@ export default Vue.extend({
       })
       const data = await ret.json()
       if (data.status === 'succeed') {
-        this.$toast.open({ message: '作成しました!', type: 'is-success' })
+        (this as any).$toast.open({ message: '作成しました!', type: 'is-success' })
       } else {
-        this.$toast.open({ message: '失敗しました', type: 'is-danger' })
+        (this as any).$toast.open({ message: '失敗しました', type: 'is-danger' })
       }
     }
   }
