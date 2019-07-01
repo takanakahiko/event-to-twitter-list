@@ -55,8 +55,6 @@ export default Vue.extend({
   async mounted() {
     const ret = await fetch(`${process.env.baseUrl}/api/user`)
     const data = await ret.json()
-    // eslint-disable-next-line
-    console.log(data)
     this.userInfo = (data.user !== {}) ? data.user : null
   },
   methods: {
@@ -75,9 +73,11 @@ export default Vue.extend({
       })
       const data = await ret.json()
       if (data.status === 'succeed') {
-        (this as any).$toast.open({ message: '作成しました!', type: 'is-success' })
+        // eslint-disable-next-line
+        this.$toast.open({ message: '作成しました!', type: 'is-success' })
       } else {
-        (this as any).$toast.open({ message: '失敗しました', type: 'is-danger' })
+        // eslint-disable-next-line
+        this.$toast.open({ message: '失敗しました', type: 'is-danger' })
       }
     }
   }
