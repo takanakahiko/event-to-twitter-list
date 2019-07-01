@@ -63,6 +63,8 @@ export default Vue.extend({
   },
   methods: {
     async submit() {
+      // eslint-disable-next-line
+      const loadingComponent = eval('this').$loading.open()
       const postData = {
         eventUrl: this.eventUrl,
         listName: this.listName
@@ -78,11 +80,12 @@ export default Vue.extend({
       const data = await ret.json()
       if (data.status === 'succeed') {
         // eslint-disable-next-line
-        (this as any).$toast.open({ message: '作成しました!', type: 'is-success' })
+        eval('this').$toast.open({ message: '作成しました!', type: 'is-success' })
       } else {
         // eslint-disable-next-line
-        (this as any).$toast.open({ message: '失敗しました', type: 'is-danger' })
+        eval('this').$toast.open({ message: '失敗しました', type: 'is-danger' })
       }
+      loadingComponent.close()
     }
   }
 })
