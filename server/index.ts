@@ -1,22 +1,19 @@
-import express from 'express'
 import * as bodyParser from "body-parser"
 
-import passport from './twitter-oauth'
+import { expressWithTwitterOauth } from './twitter-oauth'
 import connpass from './connpass'
 import { createList, addMemberIntoList } from './twitter-api'
 
-const app = express()
+const app = expressWithTwitterOauth()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(require('express-session')({ secret: 'some secret' }))
-app.use(passport.initialize())
-app.use(passport.session())
 
 app.set('json spaces', 2)
 
-app.get('/test', async (req, res) => res.send(await connpass()))
-app.get('/hello', (req, res) => res.send('world'))
-app.get('/user', (req, res) => res.json({ user: req.user }))
+app.get('/user', (req, res) => res.json({
+  user: req.user
+}))
+
 app.post('/create', async (req, res) => {
   if( !req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl ){
     return res.send({ status: 'failed' })
@@ -39,18 +36,6 @@ app.post('/create', async (req, res) => {
     uniqueTwitterIds
   )
   return res.send({ status: 'succeed' })
-})
-
-// auth
-app.get('/login', passport.authenticate('twitter'));
-app.get('/login/callback', passport.authenticate('twitter', {
-    successRedirect: "/",
-    failureRedirect: "/"
-  })
-)
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
 })
 
 module.exports = {
