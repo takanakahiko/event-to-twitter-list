@@ -6,7 +6,7 @@
           Event to Twitter List
         </h1>
 
-        <b-field label="Login">
+        <b-field label="Twitterアカウントでログイン">
           <div class="buttons">
             <a href="/api/login" class="button is-info" :disabled="isLogin">
               Twitter Login
@@ -17,11 +17,11 @@
           </div>
         </b-field>
 
-        <b-field label="Event url">
+        <b-field label="イベントページのURLを入力">
           <b-input v-model="eventUrl" :disabled="!isLogin" />
         </b-field>
 
-        <b-field label="List name">
+        <b-field label="作成する Twitter リストの名前を入力">
           <b-input v-model="listName" :disabled="!isLogin" />
         </b-field>
 
