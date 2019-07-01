@@ -30,6 +30,10 @@
             Submit
           </b-button>
         </b-field>
+
+        <div class="container">
+          SpecialThanks : <a href="https://twitter.com/9m/status/1144194540074483712">kkosuge</a>
+        </div>
       </div>
     </div>
   </section>
