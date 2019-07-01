@@ -3,7 +3,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Event to Twitter List
+          イベントページからツイッターのリストを作るやつ
         </h1>
 
         <b-field label="Twitterアカウントでログイン">
