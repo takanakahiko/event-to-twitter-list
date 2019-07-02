@@ -8,10 +8,10 @@
 
         <b-field label="Twitterアカウントでログイン">
           <div class="buttons">
-            <a href="/api/login" class="button is-info" :disabled="isLogin">
+            <a v-if="!isLogin" href="/api/login" class="button is-info">
               Twitter Login
             </a>
-            <a href="/api/logout" class="button is-danger" :disabled="!isLogin">
+            <a v-else href="/api/logout" class="button is-danger">
               Logout
             </a>
           </div>
