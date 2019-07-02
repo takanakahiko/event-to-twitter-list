@@ -48,13 +48,13 @@ export default Vue.extend({
       userInfo: null,
       isStepsClickable: false,
       eventUrl: 'https://prickathon.connpass.com/event/132723',
-      listName: 'プリッカソン7'
+      listName: 'プリッカソン7',
     }
   },
   computed: {
-    isLogin() {
-      return this.$data.userInfo != null
-    }
+    isLogin: function() {
+      return this.userInfo != null
+    },
   },
   async mounted() {
     const ret = await fetch(`${process.env.baseUrl}/api/user`)
@@ -67,15 +67,15 @@ export default Vue.extend({
       const loadingComponent = eval('this').$loading.open()
       const postData = {
         eventUrl: this.eventUrl,
-        listName: this.listName
+        listName: this.listName,
       }
       const ret = await fetch(`${process.env.baseUrl}/api/create`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       })
       const data = await ret.json()
       if (data.status === 'succeed') {
@@ -86,7 +86,7 @@ export default Vue.extend({
         eval('this').$toast.open({ message: '失敗しました', type: 'is-danger' })
       }
       loadingComponent.close()
-    }
-  }
+    },
+  },
 })
 </script>

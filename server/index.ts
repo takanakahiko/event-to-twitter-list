@@ -1,4 +1,4 @@
-import * as bodyParser from "body-parser"
+import * as bodyParser from 'body-parser'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
 import connpass from './connpass'
@@ -11,11 +11,11 @@ app.use(bodyParser.json())
 app.set('json spaces', 2)
 
 app.get('/user', (req, res) => res.json({
-  user: req.user
+  user: req.user,
 }))
 
 app.post('/create', async (req, res) => {
-  if( !req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl ){
+  if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
     return res.send({ status: 'failed' })
   }
   const id = await createList(
@@ -26,10 +26,10 @@ app.post('/create', async (req, res) => {
   )
   const connpassUsers = await connpass(`${req.body.eventUrl}/participation/`)
   const twitterIds = connpassUsers
-    .map( user => user.social.twitter )
-    .filter(value => !!value ) as string[]
-  const uniqueTwitterIds = twitterIds.filter( (id, i, self) => self.indexOf(id) == i )
-  const ret = await addMemberIntoList(
+    .map(user => user.social.twitter)
+    .filter(value => !!value) as string[]
+  const uniqueTwitterIds = twitterIds.filter((id, i, self) => self.indexOf(id) === i)
+  await addMemberIntoList(
     req.user.access_token,
     req.user.token_secret,
     id,

@@ -1,9 +1,8 @@
 import express from 'express'
-import passport from 'passport';
-import TwitterStrategy from 'passport-twitter';
+import passport from 'passport'
+import TwitterStrategy from 'passport-twitter'
 
 export const expressWithTwitterOauth = () => {
-
   passport.use(
     new TwitterStrategy(
       {
@@ -11,21 +10,21 @@ export const expressWithTwitterOauth = () => {
         consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
         callbackURL: `${process.env.APP_URL}/api/login/callback`,
       },
-      function(token, tokenSecret, profile, done) {
+      function (token, tokenSecret, profile, done) {
         profile.access_token = token
         profile.token_secret = tokenSecret
         return done(null, profile)
-      },
+      }
     )
-  );
+  )
 
-  passport.serializeUser(function(user, done) {
+  passport.serializeUser(function (user, done) {
     done(null, user)
-  });
+  })
 
-  passport.deserializeUser(function(user, done) {
+  passport.deserializeUser(function (user, done) {
     done(null, user)
-  });
+  })
 
   const app = express()
   app.use(require('express-session')({ secret: 'some secret' }))
@@ -34,9 +33,9 @@ export const expressWithTwitterOauth = () => {
 
   app.get('/login', passport.authenticate('twitter'))
   app.get('/login/callback', passport.authenticate('twitter', {
-      successRedirect: "/",
-      failureRedirect: "/"
-    })
+    successRedirect: '/',
+    failureRedirect: '/',
+  })
   )
   app.get('/logout', (req, res) => {
     req.logout()
@@ -44,5 +43,4 @@ export const expressWithTwitterOauth = () => {
   })
 
   return app
-
 }
