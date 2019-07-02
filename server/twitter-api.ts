@@ -7,8 +7,8 @@ export const createList = async (
   privateMode = false
 ): Promise<string> => {
   const client = new Twitter({
-    consumer_key: process.env.TWITTER_CONSUMER_KEY || '',
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || '',
+    consumer_key: process.env.TWITTER_CONSUMER_KEY!,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET!,
     access_token_key: accessTokenKey,
     access_token_secret: accessTokenSecret,
   })
@@ -26,8 +26,8 @@ export const addMemberIntoList = async (
   screenNames:string[] = []
 ) => {
   const client = new Twitter({
-    consumer_key: process.env.TWITTER_CONSUMER_KEY || '',
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || '',
+    consumer_key: process.env.TWITTER_CONSUMER_KEY!,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET!,
     access_token_key: accessTokenKey,
     access_token_secret: accessTokenSecret,
   })
