@@ -1,5 +1,6 @@
+import NuxtConfiguration from '@nuxt/config'
 
-export default {
+const config: NuxtConfiguration = {
   mode: 'spa',
   serverMiddleware: ['~/server'],
   /*
@@ -47,3 +48,5 @@ export default {
     baseUrl: process.env.APP_URL || 'http://localhost:3000',
   },
 }
+
+export default config
