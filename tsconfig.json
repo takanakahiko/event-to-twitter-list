@@ -14,6 +14,7 @@
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": false,
+    "noImplicitThis": true,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
