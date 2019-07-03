@@ -22,7 +22,7 @@ app.post('/create', async (req, res) => {
     req.user.access_token,
     req.user.token_secret,
     req.body.listName,
-    true
+    req.body.isPrivate
   )
   const connpassUsers = await connpass(`${req.body.eventUrl}/participation/`)
   const twitterIds = connpassUsers
