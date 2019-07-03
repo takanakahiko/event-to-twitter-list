@@ -1,49 +1,51 @@
 <template>
   <section class="hero is-light is-fullheight is-bold">
     <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          イベントページからツイッターのリストを作るやつ
-        </h1>
-
-        <b-field label="Twitterアカウントでログイン">
-          <div class="buttons">
-            <a v-if="!isLogin" href="/api/login" class="button is-info">
-              Twitter Login
-            </a>
-            <a v-else href="/api/logout" class="button is-danger">
-              Logout
-            </a>
-          </div>
-        </b-field>
-
-        <b-field label="イベントページのURLを入力">
-          <b-input v-model="eventUrl" :disabled="!isLogin" />
-        </b-field>
-
-        <b-field label="作成する Twitter リストの名前を入力">
-          <b-input v-model="listName" :disabled="!isLogin" />
-        </b-field>
-
-        <b-field label="作成する Twitter リストを公開するか選択">
-          <div class="block">
-            <b-radio v-model="isPrivate" :native-value="true" :disabled="!isLogin">
-              非公開
-            </b-radio>
-            <b-radio v-model="isPrivate" :native-value="false" :disabled="!isLogin">
-              公開
-            </b-radio>
-          </div>
-        </b-field>
-
-        <b-field class="is-grouped">
-          <b-button class="button is-link" :disabled="!isLogin" @click="submit">
-            Submit
-          </b-button>
-        </b-field>
-
+      <div class="box" style="margin: 0 auto;">
         <div class="container">
-          SpecialThanks : <a href="https://twitter.com/9m/status/1144194540074483712">kkosuge</a>
+          <h1 class="title">
+            イベントページからツイッターのリストを作るやつ
+          </h1>
+
+          <b-field label="Twitterアカウントでログイン">
+            <div class="buttons">
+              <a v-if="!isLogin" href="/api/login" class="button is-info">
+                Twitter Login
+              </a>
+              <a v-else href="/api/logout" class="button is-danger">
+                Logout
+              </a>
+            </div>
+          </b-field>
+
+          <b-field label="イベントページのURLを入力">
+            <b-input v-model="eventUrl" :disabled="!isLogin" />
+          </b-field>
+
+          <b-field label="作成する Twitter リストの名前を入力">
+            <b-input v-model="listName" :disabled="!isLogin" />
+          </b-field>
+
+          <b-field label="作成する Twitter リストを公開するか選択">
+            <div class="block">
+              <b-radio v-model="isPrivate" :native-value="true" :disabled="!isLogin">
+                非公開
+              </b-radio>
+              <b-radio v-model="isPrivate" :native-value="false" :disabled="!isLogin">
+                公開
+              </b-radio>
+            </div>
+          </b-field>
+
+          <b-field class="is-grouped">
+            <b-button class="button is-link" :disabled="!isLogin" @click="submit">
+              Submit
+            </b-button>
+          </b-field>
+
+          <div class="container">
+            SpecialThanks : <a href="https://twitter.com/9m/status/1144194540074483712">kkosuge</a>
+          </div>
         </div>
       </div>
     </div>
