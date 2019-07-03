@@ -62,11 +62,11 @@ export default Vue.extend({
       isStepsClickable: false,
       eventUrl: 'https://prickathon.connpass.com/event/132723',
       listName: 'プリッカソン7',
-      isPrivate: true
+      isPrivate: true,
     }
   },
   computed: {
-    isLogin: function() {
+    isLogin: function () {
       return (this as any).userInfo != null
     },
   },
@@ -81,7 +81,7 @@ export default Vue.extend({
       const postData = {
         eventUrl: this.eventUrl,
         listName: this.listName,
-        isPrivate: this.isPrivate
+        isPrivate: this.isPrivate,
       }
       const ret = await fetch(`${process.env.baseUrl}/api/create`, {
         method: 'POST',

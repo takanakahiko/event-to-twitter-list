@@ -28,7 +28,7 @@ export const expressWithTwitterOauth = () => {
 
   const app = express()
   app.use(require('express-session')({
-    secret: 'some secret', resave: false, saveUninitialized: true
+    secret: 'some secret', resave: false, saveUninitialized: true,
   }))
   app.use(passport.initialize())
   app.use(passport.session())
