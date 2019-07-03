@@ -25,6 +25,17 @@
           <b-input v-model="listName" :disabled="!isLogin" />
         </b-field>
 
+        <b-field label="作成する Twitter リストを公開するか選択">
+          <div class="block">
+            <b-radio v-model="isPrivate" :native-value="true" :disabled="!isLogin">
+              非公開
+            </b-radio>
+            <b-radio v-model="isPrivate" :native-value="false" :disabled="!isLogin">
+              公開
+            </b-radio>
+          </div>
+        </b-field>
+
         <b-field class="is-grouped">
           <b-button class="button is-link" :disabled="!isLogin" @click="submit">
             Submit
@@ -49,6 +60,7 @@ export default Vue.extend({
       isStepsClickable: false,
       eventUrl: 'https://prickathon.connpass.com/event/132723',
       listName: 'プリッカソン7',
+      isPrivate: true
     }
   },
   computed: {
@@ -67,6 +79,7 @@ export default Vue.extend({
       const postData = {
         eventUrl: this.eventUrl,
         listName: this.listName,
+        isPrivate: this.isPrivate
       }
       const ret = await fetch(`${process.env.baseUrl}/api/create`, {
         method: 'POST',
