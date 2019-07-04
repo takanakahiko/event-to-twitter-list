@@ -1,5 +1,6 @@
 <template>
   <section class="hero is-light is-fullheight is-bold">
+    <ForkMeOnGithub />
     <div class="hero-body">
       <div class="box" style="margin: 0 auto;">
         <div class="container">
@@ -55,7 +56,12 @@
 <script lang="ts">
 import Vue from 'vue'
 
+import ForkMeOnGithub from '~/components/ForkMeOnGithub.vue'
+
 export default Vue.extend({
+  components: {
+    ForkMeOnGithub
+  },
   data() {
     return {
       userInfo: null,
