@@ -5,7 +5,7 @@ export const createList = async (
   accessTokenSecret: string,
   name: string,
   privateMode = false
-): Promise<string> => {
+) => {
   const client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY!,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET!,
@@ -16,7 +16,10 @@ export const createList = async (
     name,
     mode: (privateMode) ? 'private' : 'public',
   })
-  return ret.id_str
+  return {
+    id: ret.id_str as string,
+    uri: ret.uri as string,
+  }
 }
 
 export const addMemberIntoList = async (

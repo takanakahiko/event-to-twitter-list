@@ -18,13 +18,13 @@ app.post('/create', async (req, res) => {
   if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
     return res.send({ status: 'failed' })
   }
-  const id = await createList(
+  const connpassUsers = await connpass(req.body.eventUrl)
+  const { id, uri } = await createList(
     req.user.access_token,
     req.user.token_secret,
     req.body.listName,
     req.body.isPrivate
   )
-  const connpassUsers = await connpass(`${req.body.eventUrl}/participation/`)
   const twitterIds = connpassUsers
     .map(user => user.social.twitter)
     .filter(value => !!value) as string[]
@@ -35,7 +35,10 @@ app.post('/create', async (req, res) => {
     id,
     uniqueTwitterIds
   )
-  return res.send({ status: 'succeed' })
+  return res.send({
+    status: 'succeed',
+    listUrl: `https://twitter.com${uri}`
+  })
 })
 
 module.exports = {

@@ -60,7 +60,7 @@ export default Vue.extend({
     return {
       userInfo: null,
       isStepsClickable: false,
-      eventUrl: 'https://prickathon.connpass.com/event/132723',
+      eventUrl: 'https://prickathon.connpass.com/event/132723/',
       listName: 'プリッカソン7',
       isPrivate: true,
     }
@@ -91,13 +91,17 @@ export default Vue.extend({
         credentials: 'include',
         body: JSON.stringify(postData),
       })
+      loadingComponent.close()
       const data = await ret.json()
+      console.log(data.listUrl)
       if (data.status === 'succeed') {
-        (this as any).$toast.open({ message: '作成しました!', type: 'is-success' })
+        (this as any).$dialog.confirm({
+          message: '作成したリストを開きますか?',
+          onConfirm: () => window.open(data.listUrl, '_blank')
+        })
       } else {
         (this as any).$toast.open({ message: '失敗しました', type: 'is-danger' })
       }
-      loadingComponent.close()
     },
   },
 })
