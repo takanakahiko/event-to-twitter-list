@@ -97,7 +97,7 @@ export default Vue.extend({
       if (data.status === 'succeed') {
         (this as any).$dialog.confirm({
           message: '作成したリストを開きますか?',
-          onConfirm: () => window.open(data.listUrl, '_blank')
+          onConfirm: () => window.open(data.listUrl, '_blank'),
         })
       } else {
         (this as any).$toast.open({ message: '失敗しました', type: 'is-danger' })

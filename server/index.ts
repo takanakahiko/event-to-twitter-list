@@ -37,7 +37,7 @@ app.post('/create', async (req, res) => {
   )
   return res.send({
     status: 'succeed',
-    listUrl: `https://twitter.com${uri}`
+    listUrl: `https://twitter.com${uri}`,
   })
 })
 
