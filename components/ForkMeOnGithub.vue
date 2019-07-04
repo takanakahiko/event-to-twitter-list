@@ -10,3 +10,9 @@ export default Vue.extend({
 
 })
 </script>
+
+<style scoped>
+a {
+  position: absolute;
+}
+</style>
