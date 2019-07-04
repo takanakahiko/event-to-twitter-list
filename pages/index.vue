@@ -60,7 +60,7 @@ import ForkMeOnGithub from '~/components/ForkMeOnGithub.vue'
 
 export default Vue.extend({
   components: {
-    ForkMeOnGithub
+    ForkMeOnGithub,
   },
   data() {
     return {
