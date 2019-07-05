@@ -1,4 +1,5 @@
 import Twitter from 'twitter'
+import { divideArray } from './utils'
 
 export const createList = async (
   accessTokenKey: string,
@@ -34,8 +35,11 @@ export const addMemberIntoList = async (
     access_token_key: accessTokenKey,
     access_token_secret: accessTokenSecret,
   })
-  await client.post('lists/members/create_all', {
-    list_id: listId,
-    screen_name: screenNames.join(','),
-  })
+  const dividedScreenNames = divideArray(screenNames, 100)
+  for(let i in dividedScreenNames){
+    await client.post('lists/members/create_all', {
+      list_id: listId,
+      screen_name: dividedScreenNames[i].join(','),
+    })
+  }
 }
