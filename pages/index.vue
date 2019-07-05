@@ -99,7 +99,6 @@ export default Vue.extend({
       })
       loadingComponent.close()
       const data = await ret.json()
-      console.log(data.listUrl)
       if (data.status === 'succeed') {
         (this as any).$dialog.confirm({
           message: '作成したリストを開きますか?',
