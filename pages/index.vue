@@ -45,7 +45,13 @@
           </b-field>
 
           <div class="container">
-            SpecialThanks : <a href="https://twitter.com/9m/status/1144194540074483712">kkosuge</a>
+            <span>
+              SpecialThanks : <a href="https://twitter.com/9m/status/1144194540074483712">kkosuge</a>
+            </span>
+            <span>
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </span>
           </div>
         </div>
       </div>
