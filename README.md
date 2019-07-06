@@ -1,22 +1,31 @@
 # event-to-twitter-list
 
-> My supreme Nuxt.js project
+> イベントページからツイッターのリストを作るやつ
 
-## Build Setup
+## 開発環境
 
-``` bash
-# install dependencies
-$ npm run install
+- そこそこ新しい Node
+- 開発用のTwitterアプリケーション
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## 開発
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+まず，環境変数を設定します．
+TWITTER_CONSUMER_KEY と TWITTER_CONSUMER_SECRET に関しては，自分で用意してください．
 
-# generate static project
-$ npm run generate
+```
+export TWITTER_CONSUMER_KEY=XXXXXXXXXXX
+export TWITTER_CONSUMER_SECRET=YYYYYYYYYYYYYYYYYYYYYYYYY
+export APP_URL=http://localhost:3000
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+Nuxt 製のアプリケーションです．
+以下のコマンドで開発します
+
+``` bash
+$ npm install
+$ npm run dev # http://localhost:3000 で開発用サーバが立ちます
+```
+
+## Contribution
+
+PR 大歓迎です
