@@ -10,9 +10,14 @@ app.use(bodyParser.json())
 
 app.set('json spaces', 2)
 
-app.get('/user', (req, res) => res.json({
-  user: req.user,
-}))
+app.get('/user', (req, res) => {
+  if(!req.user) res.json({})
+  else res.json({
+    user: {
+      username: req.user.username
+    }
+  })
+})
 
 app.get('/test', async (req, res) => res.json(await fechConnpassUsers('https://battleconference-u30.connpass.com/event/127864/')))
 
