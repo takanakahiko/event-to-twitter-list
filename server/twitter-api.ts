@@ -36,7 +36,7 @@ export const addMemberIntoList = async (
     access_token_secret: accessTokenSecret,
   })
   const dividedScreenNames = divideArray(screenNames, 100)
-  for(let i in dividedScreenNames){
+  for (const i in dividedScreenNames) {
     await client.post('lists/members/create_all', {
       list_id: listId,
       screen_name: dividedScreenNames[i].join(','),

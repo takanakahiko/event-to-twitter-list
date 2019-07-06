@@ -1,7 +1,7 @@
 import * as bodyParser from 'body-parser'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
-import { fechConnpassUsers, hoge } from './connpass'
+import { fechConnpassUsers } from './connpass'
 import { createList, addMemberIntoList } from './twitter-api'
 
 const app = expressWithTwitterOauth()

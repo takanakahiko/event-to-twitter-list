@@ -26,15 +26,15 @@ export const fechConnpassUsers = async (eventUrl = 'https://prickathon.connpass.
     return { name, ptype, social, status, profile, comment, image }
   })
   const moreLinks = $('.empty a').toArray()
-  for(let aTag of moreLinks){
-    const linkto = aTag.attribs['href']
-    for(let i = 1;; i++ ){
+  for (const aTag of moreLinks) {
+    const linkto = aTag.attribs.href
+    for (let i = 1; ; i++) {
       const { users, hasNext } = await fetchSinglepageOfPaging(linkto + '?page=' + i)
-      users.forEach( v => ret.push(v) )
-      if(!hasNext) break;
+      users.forEach(v => ret.push(v))
+      if (!hasNext) break
     }
   }
-  return ret;
+  return ret
 }
 
 const fetchSinglepageOfPaging = async (url:string) => {
@@ -61,7 +61,7 @@ const fetchSinglepageOfPaging = async (url:string) => {
     return { name, ptype, social, status, profile, comment, image }
   })
   return { users,
-    hasNext: $('.userpaging_area').text().includes('次へ')
+    hasNext: $('.userpaging_area').text().includes('次へ'),
   }
 }
 
