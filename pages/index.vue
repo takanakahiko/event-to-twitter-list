@@ -8,6 +8,13 @@
             イベントページからツイッターのリストを作るやつ
           </h1>
 
+          <div class="container has-text-right">
+            <span>
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
+            </span>
+          </div>
+
           <b-field label="Twitterアカウントでログイン">
             <div class="buttons">
               <a v-if="!isLogin" href="/api/login" class="button is-info">
@@ -47,10 +54,6 @@
           <div class="container">
             <span>
               SpecialThanks : <a href="https://twitter.com/9m/status/1144194540074483712">kkosuge</a>
-            </span>
-            <span>
-              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
-              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
             </span>
           </div>
         </div>
