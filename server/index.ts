@@ -1,7 +1,7 @@
 import * as bodyParser from 'body-parser'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
-import connpass from './connpass'
+import { fechConnpassUsers, hoge } from './connpass'
 import { createList, addMemberIntoList } from './twitter-api'
 
 const app = expressWithTwitterOauth()
@@ -14,11 +14,13 @@ app.get('/user', (req, res) => res.json({
   user: req.user,
 }))
 
+app.get('/test', async (req, res) => res.json(await fechConnpassUsers('https://battleconference-u30.connpass.com/event/127864/')))
+
 app.post('/create', async (req, res) => {
   if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
     return res.send({ status: 'failed' })
   }
-  const connpassUsers = await connpass(req.body.eventUrl)
+  const connpassUsers = await fechConnpassUsers(req.body.eventUrl)
   const { id, uri } = await createList(
     req.user.access_token,
     req.user.token_secret,
@@ -26,14 +28,15 @@ app.post('/create', async (req, res) => {
     req.body.isPrivate
   )
   const twitterIds = connpassUsers
+    .filter(user => user.status !== 'キャンセル')
     .map(user => user.social.twitter)
     .filter(value => !!value) as string[]
-  const uniqueTwitterIds = twitterIds.filter((id, i, self) => self.indexOf(id) === i)
+
   await addMemberIntoList(
     req.user.access_token,
     req.user.token_secret,
     id,
-    uniqueTwitterIds
+    twitterIds
   )
   return res.send({
     status: 'succeed',
