@@ -26,7 +26,7 @@
             </div>
           </b-field>
 
-          <b-field label="イベントページのURLを入力">
+          <b-field label="Connpass のイベントページの URL を入力">
             <b-input v-model="eventUrl" :disabled="!isLogin" />
           </b-field>
 
