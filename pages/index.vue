@@ -45,6 +45,12 @@
             </div>
           </b-field>
 
+          <b-field custom-class="is-large">
+            <b-switch v-model="isTweet">
+              リストを作成したことをツイートする
+            </b-switch>
+          </b-field>
+
           <b-field class="is-grouped">
             <b-button class="button is-link" :disabled="!isLogin" @click="submit">
               Submit
@@ -78,6 +84,7 @@ export default Vue.extend({
       eventUrl: 'https://prickathon.connpass.com/event/132723/',
       listName: 'プリッカソン7',
       isPrivate: true,
+      isTweet: true,
     }
   },
   computed: {
@@ -97,6 +104,7 @@ export default Vue.extend({
         eventUrl: this.eventUrl,
         listName: this.listName,
         isPrivate: this.isPrivate,
+        isTweet: this.isTweet,
       }
       const ret = await fetch(`${process.env.baseUrl}/api/create`, {
         method: 'POST',

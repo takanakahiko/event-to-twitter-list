@@ -43,3 +43,19 @@ export const addMemberIntoList = async (
     })
   }
 }
+
+export const tweet = async (
+  accessTokenKey: string,
+  accessTokenSecret: string,
+  text: string,
+) => {
+  const client = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY!,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET!,
+    access_token_key: accessTokenKey,
+    access_token_secret: accessTokenSecret,
+  })
+  await client.post('statuses/update.json', {
+    status: text,
+  })
+}

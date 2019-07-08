@@ -2,7 +2,7 @@ import * as bodyParser from 'body-parser'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
 import { fechConnpassUsers } from './connpass'
-import { createList, addMemberIntoList } from './twitter-api'
+import { createList, addMemberIntoList, tweet } from './twitter-api'
 
 const app = expressWithTwitterOauth()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -43,6 +43,18 @@ app.post('/create', async (req, res) => {
     id,
     twitterIds
   )
+
+  const listUrl = `https://twitter.com${uri}`
+  const applicationUrl = 'https://event-to-twitter-list.herokuapp.com/'
+  const listUrlforTweet = (req.body.isPrivate) ? '' : listUrl
+  if(req.body.isTweet){
+    await tweet(
+      req.user.access_token,
+      req.user.token_secret,
+      `イベントページからツイッターのリストを作るやつ( ${applicationUrl} )で，Twitterリストを作成しました！\n ${listUrlforTweet}`
+    )
+  }
+
   return res.send({
     status: 'succeed',
     listUrl: `https://twitter.com${uri}`,
