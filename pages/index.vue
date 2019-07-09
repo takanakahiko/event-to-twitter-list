@@ -27,11 +27,16 @@
           </b-field>
 
           <b-field label="Connpass のイベントページの URL を入力">
-            <b-input v-model="eventUrl" :disabled="!isLogin" />
+            <b-input
+              v-model="eventUrl"
+              :disabled="!isLogin"
+              validation-message="https://XXXX.connpass.com/event/YYYY/ の形式にしてください"
+              pattern="https://.+?\.connpass\.com/event/.+?/"
+            />
           </b-field>
 
           <b-field label="作成する Twitter リストの名前を入力">
-            <b-input v-model="listName" :disabled="!isLogin" />
+            <b-input v-model="listName" :disabled="!isLogin" maxlength="25" />
           </b-field>
 
           <b-field label="作成する Twitter リストを公開するか選択">
