@@ -14,10 +14,10 @@ const config: NuxtConfiguration = {
       { hid: 'description', name: 'description', content: 'connpass の URL から Twitter のリストを自動生成します' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'イベントページからツイッターのリストを作るやつ' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'https://event-to-twitter-list.herokuapp.com/ogp.png' },
+      { hid: 'og:url', property: 'og:url', content: 'https://event-to-twitter-list.herokuapp.com' },
       { hid: 'og:title', property: 'og:title', content: 'イベントページからツイッターのリストを作るやつ' },
       { hid: 'og:description', property: 'og:description', content: 'connpass の URL から Twitter のリストを自動生成します' },
-      { hid: 'og:image', property: 'og:image', content: 'https://example.com/img/ogp/common.jpg' },
+      { hid: 'og:image', property: 'og:image', content: 'https://event-to-twitter-list.herokuapp.com/ogp.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
