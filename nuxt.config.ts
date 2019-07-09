@@ -18,6 +18,7 @@ const config: NuxtConfiguration = {
       { hid: 'og:title', property: 'og:title', content: 'イベントページからツイッターのリストを作るやつ' },
       { hid: 'og:description', property: 'og:description', content: 'connpass の URL から Twitter のリストを自動生成します' },
       { hid: 'og:image', property: 'og:image', content: 'https://event-to-twitter-list.herokuapp.com/ogp.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
