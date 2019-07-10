@@ -18,4 +18,9 @@ action "Build" {
   needs = "Install"
   uses = "docker://node:latest"
   runs = "npm run build"
+  env = {
+    TWITTER_CONSUMER_KEY    = "TEMP"
+    TWITTER_CONSUMER_SECRET = "TEMP"
+    APP_URL                 = "https://event-to-twitter-list.herokuapp.com/"
+  }
 }
