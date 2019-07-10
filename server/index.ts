@@ -27,7 +27,7 @@ app.post('/create', async (req, res) => {
   if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
     return res.send({
       status: 'failed',
-      message: 'パラメータが不足しています'
+      message: 'パラメータが不足しています',
     })
   }
   let connpassUsers
@@ -43,7 +43,7 @@ app.post('/create', async (req, res) => {
     .filter(user => user.status !== 'キャンセル')
     .map(user => user.social.twitter)
     .filter(value => !!value) as string[]
-  if(twitterIds.length === 0){
+  if (twitterIds.length === 0) {
     return res.send({
       status: 'failed',
       message: '参加ユーザが取得できませんでした',
