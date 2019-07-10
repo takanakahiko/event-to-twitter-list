@@ -127,7 +127,7 @@ export default Vue.extend({
           onConfirm: () => window.open(data.listUrl, '_blank'),
         })
       } else {
-        (this as any).$toast.open({ message: '失敗しました', type: 'is-danger' })
+        (this as any).$toast.open({ message: `失敗しました(${data.message})`, type: 'is-danger' })
       }
     },
   },
