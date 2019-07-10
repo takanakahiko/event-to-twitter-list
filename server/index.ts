@@ -2,6 +2,7 @@ import * as bodyParser from 'body-parser'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
 import { fechConnpassUsers } from './connpass'
+import { fetchTwiplaUsers } from './twipla'
 import { createList, addMemberIntoList, tweet } from './twitter-api'
 
 const app = expressWithTwitterOauth()
@@ -27,14 +28,15 @@ app.post('/create', async (req, res) => {
   if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
     return res.send({ status: 'failed' })
   }
-  const connpassUsers = await fechConnpassUsers(req.body.eventUrl)
+  const fetchUsers = req.body.eventUrl.includes('connpass') ? fechConnpassUsers : fetchTwiplaUsers
+  const users = await fetchUsers(req.body.eventUrl)
   const { id, uri } = await createList(
     req.user.access_token,
     req.user.token_secret,
     req.body.listName,
     req.body.isPrivate
   )
-  const twitterIds = connpassUsers
+  const twitterIds = users
     .filter(user => user.status !== 'キャンセル')
     .map(user => user.social.twitter)
     .filter(value => !!value) as string[]
