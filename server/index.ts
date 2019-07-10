@@ -26,20 +26,38 @@ app.get('/test', async (req, res) => res.json(await fechConnpassUsers('https://b
 
 app.post('/create', async (req, res) => {
   if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
-    return res.send({ status: 'failed' })
+    return res.send({
+      status: 'failed',
+      message: 'パラメータが不足しています',
+    })
   }
   const fetchUsers = req.body.eventUrl.includes('connpass') ? fechConnpassUsers : fetchTwiplaUsers
-  const users = await fetchUsers(req.body.eventUrl)
+  let users
+  try {
+    users = await fetchUsers(req.body.eventUrl)
+  } catch (error) {
+    return res.send({
+      status: 'failed',
+      message: 'イベントのURLが不正です',
+    })
+  }
+  const twitterIds = users
+    .filter(user => user.status !== 'キャンセル')
+    .map(user => user.social.twitter)
+    .filter(value => !!value) as string[]
+  if (twitterIds.length === 0) {
+    return res.send({
+      status: 'failed',
+      message: '参加ユーザが取得できませんでした',
+    })
+  }
+
   const { id, uri } = await createList(
     req.user.access_token,
     req.user.token_secret,
     req.body.listName,
     req.body.isPrivate
   )
-  const twitterIds = users
-    .filter(user => user.status !== 'キャンセル')
-    .map(user => user.social.twitter)
-    .filter(value => !!value) as string[]
 
   await addMemberIntoList(
     req.user.access_token,
