@@ -2,6 +2,7 @@ import * as bodyParser from 'body-parser'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
 import { fechConnpassUsers } from './connpass'
+import { fetchTwiplaUsers } from './twipla'
 import { createList, addMemberIntoList, tweet } from './twitter-api'
 
 const app = expressWithTwitterOauth()
@@ -30,16 +31,17 @@ app.post('/create', async (req, res) => {
       message: 'パラメータが不足しています',
     })
   }
-  let connpassUsers
+  const fetchUsers = req.body.eventUrl.includes('connpass') ? fechConnpassUsers : fetchTwiplaUsers
+  let users
   try {
-    connpassUsers = await fechConnpassUsers(req.body.eventUrl)
+    users = await fetchUsers(req.body.eventUrl)
   } catch (error) {
     return res.send({
       status: 'failed',
       message: 'イベントのURLが不正です',
     })
   }
-  const twitterIds = connpassUsers
+  const twitterIds = users
     .filter(user => user.status !== 'キャンセル')
     .map(user => user.social.twitter)
     .filter(value => !!value) as string[]
@@ -49,6 +51,7 @@ app.post('/create', async (req, res) => {
       message: '参加ユーザが取得できませんでした',
     })
   }
+
   const { id, uri } = await createList(
     req.user.access_token,
     req.user.token_secret,

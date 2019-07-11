@@ -26,12 +26,12 @@
             </div>
           </b-field>
 
-          <b-field label="Connpass のイベントページの URL を入力">
+          <b-field label="Connpass または TwiPla のイベントページの URL を入力">
             <b-input
               v-model="eventUrl"
               :disabled="!isLogin"
-              validation-message="https://XXXX.connpass.com/event/YYYY/ の形式にしてください"
-              pattern="https://.+?\.connpass\.com/event/.+?/"
+              validation-message="https://XXXX.connpass.com/event/YYYY/ または https://twipla.jp/events/XXXX/ の形式にしてください"
+              pattern="https:\/\/(.+\.connpass\.com\/event\/.+|twipla\.jp\/events\/\d+)\/?"
             />
           </b-field>
 
