@@ -64,8 +64,3 @@ const fetchSinglepageOfPaging = async (url:string) => {
     hasNext: $('.userpaging_area').text().includes('次へ'),
   }
 }
-
-export const hoge = async () => {
-  const ret = await fetchSinglepageOfPaging('https://battleconference-u30.connpass.com/event/127864/ptype/179667/participants/?page=1')
-  return ret
-}

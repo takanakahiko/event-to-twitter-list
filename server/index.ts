@@ -22,8 +22,6 @@ app.get('/user', (req, res) => {
   }
 })
 
-app.get('/test', async (req, res) => res.json(await fechConnpassUsers('https://battleconference-u30.connpass.com/event/127864/')))
-
 app.post('/create', async (req, res) => {
   if (!req.user || !req.user.access_token || !req.user.token_secret || !req.body.listName || !req.body.eventUrl) {
     return res.send({
