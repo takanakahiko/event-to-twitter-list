@@ -12,7 +12,7 @@ export const fetchTwiplaUsers = async (eventUrl = 'https://twipla.jp/events/3763
     const third = $(tds[2])
     const contents = second.contents()
 
-    const twitter = contents[0].data
+    const twitter = contents[0].data ? contents[0].data.substring(1) : undefined
     const name = contents[2] ? contents[2].data || '' : ''
     const profile = third.text()
     const image = `https:${first.find('img').attr('src')}`
