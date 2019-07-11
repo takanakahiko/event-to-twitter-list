@@ -5,7 +5,7 @@ export const fetchTwiplaUsers = async (eventUrl = 'https://twipla.jp/events/3763
   const [eventId] = eventUrl.match(/\d+/)!
   const { data } = await axios.get(`https://twipla.jp/events/printlist/${eventId}`)
   const $ = cheerio.load(data)
-  const ret = $('tr').toArray().map((e) => {
+  const ret = $('tr').toArray().filter((_, i) => i !== 0).map((e) => {
     const tds = $(e).find('td').toArray()
     const first = $(tds[0])
     const second = $(tds[1])
