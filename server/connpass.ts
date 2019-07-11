@@ -31,7 +31,7 @@ const fetchSinglepageOfPaging = async (url:string) => {
 const getUsers = async (url:string) => {
   const { data } = await axios.get(url)
   const $ = cheerio.load(data)
-  return  $('.user').toArray().map((e) => {
+  return $('.user').toArray().map((e) => {
     const name = $(e).find('.display_name a').text()
     const ptype = $(e).find('.label_ptype_name').text()
     const status = $(e).find('.label_status_tag').text().trim()
