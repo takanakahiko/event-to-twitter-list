@@ -22,7 +22,7 @@
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "express-session": "^1.19.0",
-    "nuxt": "4.6.3",
+    "nuxt": "4.6.4",
     "nuxt-buefy": "^0.3.2",
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
@@ -46,5 +46,12 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.2.3",
     "nodemon": "^3.1.14"
+  },
+  "overrides": {
+    "brace-expansion@^1": "^1.1.22",
+    "request": {
+      "form-data": "^2.5.6",
+      "qs": "^6.16.2"
+    }
   }
 }
