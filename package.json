@@ -30,7 +30,6 @@
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "@nuxt/typescript": "^2.8.1",
     "@nuxtjs/eslint-config": "0.0.1",
     "@types/cheerio": "^0.22.11",
     "@types/passport": "^1.0.0",
