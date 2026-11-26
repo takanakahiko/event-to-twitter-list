@@ -36,8 +36,11 @@
   $button-padding-horizontal: 0.75em,
 );
 @use "bulma/sass/elements/title" with (
-  $title-weight: 400,
+  $title-weight: 600,
   $title-line-height: 1.125,
+);
+@use "bulma/sass/layout/section" with (
+  $section-padding-desktop: 3rem 1.5rem,
 );
 @use "bulma/sass/themes/light";
 @use "bulma/sass/themes/setup";
@@ -49,6 +52,10 @@
 @use "bulma/sass/layout";
 @use "bulma/sass/base/skeleton";
 @use "bulma/sass/helpers";
+// Buefy 0.7 の未選択のラジオボタンの枠は grey
+@use "buefy/src/scss/components/radio" with (
+  $radio-border-color: hsl(0, 0%, 48%),
+);
 @use "buefy/src/scss/buefy";
 
 :root {
