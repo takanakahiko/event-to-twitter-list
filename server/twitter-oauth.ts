@@ -3,6 +3,18 @@ import passport from 'passport'
 import { Strategy as TwitterStrategy } from 'passport-twitter'
 import session from 'express-session'
 
+// セッションに入れる Twitter のプロフィール（passport-twitter の profile にトークンを足したもの）
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface User {
+      username?: string
+      access_token?: string
+      token_secret?: string
+    }
+  }
+}
+
 export const expressWithTwitterOauth = () => {
   passport.use(
     new TwitterStrategy(
@@ -24,7 +36,7 @@ export const expressWithTwitterOauth = () => {
     done(null, user)
   })
 
-  passport.deserializeUser(function (user, done) {
+  passport.deserializeUser(function (user: Express.User, done) {
     done(null, user)
   })
 
@@ -41,9 +53,12 @@ export const expressWithTwitterOauth = () => {
     failureRedirect: '/',
   })
   )
-  app.get('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/')
+  app.get('/logout', (req, res, next) => {
+    // passport 0.6 以降、logout はセッションを作り直すので完了を待ってからリダイレクトする
+    req.logout((err) => {
+      if (err) return next(err)
+      res.redirect('/')
+    })
   })
 
   return app
