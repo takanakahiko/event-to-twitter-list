@@ -1,4 +1,5 @@
-import * as bodyParser from 'body-parser'
+import bodyParser from 'body-parser'
+import express from 'express'
 
 import { expressWithTwitterOauth } from './twitter-oauth'
 import { fechConnpassUsers } from './connpass'
@@ -33,7 +34,7 @@ app.post('/create', async (req, res) => {
   let users
   try {
     users = await fetchUsers(req.body.eventUrl)
-  } catch (error) {
+  } catch {
     return res.send({
       status: 'failed',
       message: 'イベントのURLが不正です',
@@ -81,7 +82,8 @@ app.post('/create', async (req, res) => {
   })
 })
 
-module.exports = {
-  path: '/api',
-  handler: app,
-}
+// 以前の serverMiddleware { path: '/api', handler: app } と同じく、/api を外したパスで app に渡す
+const root = express()
+root.use('/api', app)
+
+export default fromNodeMiddleware(root)

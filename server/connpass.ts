@@ -1,5 +1,5 @@
 import { URL } from 'url'
-import cheerio from 'cheerio'
+import * as cheerio from 'cheerio'
 import axios from 'axios'
 
 export const fechConnpassUsers = async (eventUrl = 'https://prickathon.connpass.com/event/132723/') => {

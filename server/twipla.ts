@@ -1,4 +1,4 @@
-import cheerio from 'cheerio'
+import * as cheerio from 'cheerio'
 import axios from 'axios'
 
 export const fetchTwiplaUsers = async (eventUrl = 'https://twipla.jp/events/376346') => {
@@ -10,7 +10,8 @@ export const fetchTwiplaUsers = async (eventUrl = 'https://twipla.jp/events/3763
     const first = $(tds[0])
     const second = $(tds[1])
     const third = $(tds[2])
-    const contents = second.contents()
+    // テキストノードの data を読む（要素ノードなら undefined）
+    const contents = second.contents().toArray() as { data?: string }[]
 
     const twitter = contents[0].data ? contents[0].data.substring(1) : undefined
     const name = contents[2] ? contents[2].data || '' : ''

@@ -11,7 +11,6 @@
           <div class="container has-text-right">
             <span>
               <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
-              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
             </span>
           </div>
 
@@ -74,17 +73,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 
 import ForkMeOnGithub from '~/components/ForkMeOnGithub.vue'
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     ForkMeOnGithub,
   },
+  setup() {
+    // Vue 3 はテンプレート内の <script> を描画しないので、ツイートボタンのスクリプトは head に入れる
+    useHead({
+      script: [{ src: 'https://platform.twitter.com/widgets.js', async: true }],
+    })
+  },
   data() {
     return {
-      userInfo: null,
+      userInfo: null as { username: string } | null,
       isStepsClickable: false,
       eventUrl: 'https://prickathon.connpass.com/event/132723/',
       listName: 'プリッカソン7',
@@ -94,24 +99,25 @@ export default Vue.extend({
   },
   computed: {
     isLogin: function () {
-      return (this as any).userInfo != null
+      return this.userInfo != null
     },
   },
   async mounted() {
-    const ret = await fetch(`${process.env.baseUrl}/api/user`)
+    const ret = await fetch(`${this.$config.public.baseUrl}/api/user`)
     const data = await ret.json()
-    this.userInfo = (data.user !== {}) ? data.user : null
+    // 未ログインのときは {} が返り、data.user は undefined になる
+    this.userInfo = data.user ?? null
   },
   methods: {
     async submit() {
-      const loadingComponent = (this as any).$loading.open()
+      const loadingComponent = this.$buefy.loading.open({})
       const postData = {
         eventUrl: this.eventUrl,
         listName: this.listName,
         isPrivate: this.isPrivate,
         isTweet: this.isTweet,
       }
-      const ret = await fetch(`${process.env.baseUrl}/api/create`, {
+      const ret = await fetch(`${this.$config.public.baseUrl}/api/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,12 +128,12 @@ export default Vue.extend({
       loadingComponent.close()
       const data = await ret.json()
       if (data.status === 'succeed') {
-        (this as any).$dialog.confirm({
+        this.$buefy.dialog.confirm({
           message: '作成したリストを開きますか?',
           onConfirm: () => window.open(data.listUrl, '_blank'),
         })
       } else {
-        (this as any).$toast.open({ message: `失敗しました(${data.message})`, type: 'is-danger' })
+        this.$buefy.toast.open({ message: `失敗しました(${data.message})`, type: 'is-danger' })
       }
     },
   },
