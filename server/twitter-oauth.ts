@@ -1,16 +1,18 @@
 import express from 'express'
 import passport from 'passport'
-import TwitterStrategy from 'passport-twitter'
+import { Strategy as TwitterStrategy } from 'passport-twitter'
+import session from 'express-session'
 
 export const expressWithTwitterOauth = () => {
   passport.use(
     new TwitterStrategy(
       {
-        consumerKey: process.env.TWITTER_CONSUMER_KEY,
-        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+        consumerKey: process.env.TWITTER_CONSUMER_KEY!,
+        consumerSecret: process.env.TWITTER_CONSUMER_SECRET!,
         callbackURL: `${process.env.APP_URL}/api/login/callback`,
       },
-      function (token, tokenSecret, profile, done) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      function (token: string, tokenSecret: string, profile: any, done: (error: any, user?: any) => void) {
         profile.access_token = token
         profile.token_secret = tokenSecret
         return done(null, profile)
@@ -27,7 +29,7 @@ export const expressWithTwitterOauth = () => {
   })
 
   const app = express()
-  app.use(require('express-session')({
+  app.use(session({
     secret: 'some secret', resave: false, saveUninitialized: true,
   }))
   app.use(passport.initialize())

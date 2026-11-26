@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+// Buefy 3 (Bulma 1) を、以前の nuxt-buefy（Buefy 0.7 / Bulma 0.7）に近い見た目で使うための設定。
+// buefy/dist/css/buefy.css はダークモード（prefers-color-scheme: dark）を含むので使わず、ここでビルドする。
+@use "bulma/sass/utilities" with (
+  $scheme-h: 0,
+  $scheme-s: 0%,
+  $black: hsl(0, 0%, 4%),
+  $black-bis: hsl(0, 0%, 7%),
+  $black-ter: hsl(0, 0%, 14%),
+  $grey-darker: hsl(0, 0%, 21%),
+  $grey-dark: hsl(0, 0%, 29%),
+  $grey: hsl(0, 0%, 48%),
+  $grey-light: hsl(0, 0%, 71%),
+  $grey-lighter: hsl(0, 0%, 86%),
+  $grey-lightest: hsl(0, 0%, 93%),
+  $white-ter: hsl(0, 0%, 96%),
+  $white-bis: hsl(0, 0%, 98%),
+  $white: hsl(0, 0%, 100%),
+  $family-sans-serif: (BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif),
+  $primary: #7957d5,
+  $link: #7957d5,
+  $info: #209cee,
+  $success: #23d160,
+  $warning: #ffdd57,
+  $danger: #ff3860,
+  $radius-small: 2px,
+  $radius: 4px,
+  $radius-large: 6px,
+  $control-height: 2.25em,
+  $control-padding-vertical: calc(0.375em - 1px),
+  $control-padding-horizontal: calc(0.625em - 1px),
+);
+@use "bulma/sass/elements/button" with (
+  $button-padding-vertical: calc(0.375em - 1px),
+  $button-padding-horizontal: 0.75em,
+);
+@use "bulma/sass/elements/title" with (
+  $title-weight: 400,
+  $title-line-height: 1.125,
+);
+@use "bulma/sass/themes/light";
+@use "bulma/sass/themes/setup";
+@use "bulma/sass/base";
+@use "bulma/sass/elements";
+@use "bulma/sass/form";
+@use "bulma/sass/components";
+@use "bulma/sass/grid";
+@use "bulma/sass/layout";
+@use "bulma/sass/base/skeleton";
+@use "bulma/sass/helpers";
+@use "buefy/src/scss/buefy";
+
+:root {
+  @include light.light-theme;
+  @include setup.setup-theme;
+}
+
+// Bulma 0.7 の .hero.is-light.is-bold のグラデーション
+.hero.is-light.is-bold {
+  background-image: linear-gradient(141deg, #dfd8d9 0%, whitesmoke 71%, white 100%);
+}
+
+// Bulma 0.7 では色付きの hero の中のリンクは周りの文字色を継承していた
+.hero.is-light a:not(.button):not(.dropdown-item):not(.tag) {
+  color: inherit;
+}
+
+// Bulma 0.7 の .box の角丸と影
+.box {
+  border-radius: 6px;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
